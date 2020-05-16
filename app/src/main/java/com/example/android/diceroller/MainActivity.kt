@@ -13,11 +13,17 @@ import androidx.appcompat.app.AppCompatActivity
  */
 class MainActivity : AppCompatActivity() {
 
+    // The lateinit keyword promises the Kotlin compiler that the variable will be initialized
+    // before the code calls any operations on it.
+    lateinit var diceImage : ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //associates the layout with the activity,
         // and inflates that layout when the activity is created.
         setContentView(R.layout.activity_main)
+
+        diceImage = findViewById(R.id.dice_image)
 
         val rollButton: Button = findViewById(R.id.roll_button)
         /*A click handler is a method that is invoked each time the user clicks or taps on
@@ -43,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val randomInt = (1..6).random()
         //resultText.text = randomInt.toString()
 
-        val diceImage: ImageView = findViewById(R.id.dice_image)
+        // this is not efficient!!! :  val diceImage: ImageView = findViewById(R.id.dice_image)
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
