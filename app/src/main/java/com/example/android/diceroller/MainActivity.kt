@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     // The lateinit keyword promises the Kotlin compiler that the variable will be initialized
     // before the code calls any operations on it.
+    // Minimize the calls to findViewById() in your code by declaring fields to hold those views,
+    // and initializing the fields in onCreate(). Use the lateinit keyword for the field to avoid
+    // needing to declare it nullable.
     lateinit var diceImage : ImageView
     lateinit var diceImage2 : ImageView
 
@@ -49,10 +52,21 @@ class MainActivity : AppCompatActivity() {
 //
 //        val resetButton: Button = findViewById(R.id.reset_button)
 //        resetButton.setOnClickListener { reset() }
+
+        val clearButton: Button = findViewById(R.id.clear_button)
+        clearButton.setOnClickListener { clear() }
+    }
+
+    private fun clear() {
+        diceImage.setImageResource(R.drawable.empty_dice)
+        diceImage2.setImageResource(R.drawable.empty_dice)
     }
 
     /**
      * Click listener for the Roll button.
+     *
+     * Use setImageResource() to change the view's image to a different resource.
+     * Use R.drawable to refer to specific drawables, e.g. setImageResource(R.drawable.image_name)
      */
     private fun rollDice() {
         diceImage.setImageResource(getRandomDiceImage())
