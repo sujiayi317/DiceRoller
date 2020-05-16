@@ -2,6 +2,7 @@ package com.example.android.diceroller
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -25,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         2.The setOnClickListener() method, which connects the Button to the handler method.*/
         rollButton.setOnClickListener { rollDice() }
 
-        val countUpButton: Button = findViewById(R.id.count_up_button)
-        countUpButton.setOnClickListener { countUp() }
-
-        val resetButton: Button = findViewById(R.id.reset_button)
-        resetButton.setOnClickListener { reset() }
+//        val countUpButton: Button = findViewById(R.id.count_up_button)
+//        countUpButton.setOnClickListener { countUp() }
+//
+//        val resetButton: Button = findViewById(R.id.reset_button)
+//        resetButton.setOnClickListener { reset() }
     }
 
     /**
@@ -37,34 +38,45 @@ class MainActivity : AppCompatActivity() {
      */
     private fun rollDice() {
 //        Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
-        val resultText: TextView = findViewById(R.id.result_text)
+        //val resultText: TextView = findViewById(R.id.result_text)
 //        resultText.text = "Dice Rolled!"
         val randomInt = (1..6).random()
-        resultText.text = randomInt.toString()
-    }
+        //resultText.text = randomInt.toString()
 
-    /**
-     * Click listener for the countUp button.
-     */
-    private fun countUp() {
-        val resultText: TextView = findViewById(R.id.result_text)
-        val str = resultText.text.toString()
-        if (str == "Hello World!") resultText.text = "1" else {
-            var resultInt = resultText.text.toString().toInt()
-
-            if (resultInt < 6) {
-                resultInt++
-                resultText.text = resultInt.toString()
-            }
+        val diceImage: ImageView = findViewById(R.id.dice_image)
+        val drawableResource = when (randomInt) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
         }
+        diceImage.setImageResource(drawableResource)
     }
 
-    /**
-     * Click listener for the reset button.
-     */
-    private fun reset() {
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = "0"
-    }
+//    /**
+//     * Click listener for the countUp button.
+//     */
+//    private fun countUp() {
+//        val resultText: TextView = findViewById(R.id.result_text)
+//        val str = resultText.text.toString()
+//        if (str == "Hello World!") resultText.text = "1" else {
+//            var resultInt = resultText.text.toString().toInt()
+//
+//            if (resultInt < 6) {
+//                resultInt++
+//                resultText.text = resultInt.toString()
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Click listener for the reset button.
+//     */
+//    private fun reset() {
+//        val resultText: TextView = findViewById(R.id.result_text)
+//        resultText.text = "0"
+//    }
 
 }
