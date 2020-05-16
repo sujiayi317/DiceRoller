@@ -10,12 +10,23 @@ import androidx.appcompat.app.AppCompatActivity
  * DiceRoller demonstrates simple interactivity in an Android app.
  * It contains one button that updates an image view with a dice
  * vector image with a random value between 1 and 6.
+ *
+ * Challenge: Modify the DiceRoller app to have two dice. When the user taps the Roll button,
+ * each die should have a value independent of the other.
+ * Tip: Create a new private function to get a random drawable image and return an integer for
+ * the drawable resource. Use that function for each of the die images.
+ *
+ * In 2018, Google announced Android Jetpack, which is a collection of libraries that includes
+ * many of the previous classes and functions of the support library, while also expanding on
+ * the support library.
+ * The namespace for the Android Jetpack libraries is androidx
  */
 class MainActivity : AppCompatActivity() {
 
     // The lateinit keyword promises the Kotlin compiler that the variable will be initialized
     // before the code calls any operations on it.
     lateinit var diceImage : ImageView
+    lateinit var diceImage2 : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         diceImage = findViewById(R.id.dice_image)
+        diceImage2 = findViewById(R.id.dice_image2)
 
         val rollButton: Button = findViewById(R.id.roll_button)
         /*A click handler is a method that is invoked each time the user clicks or taps on
@@ -43,14 +55,13 @@ class MainActivity : AppCompatActivity() {
      * Click listener for the Roll button.
      */
     private fun rollDice() {
-//        Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
-        //val resultText: TextView = findViewById(R.id.result_text)
-//        resultText.text = "Dice Rolled!"
-        val randomInt = (1..6).random()
-        //resultText.text = randomInt.toString()
+        diceImage.setImageResource(getRandomDiceImage())
+        diceImage2.setImageResource(getRandomDiceImage())
+    }
 
-        // this is not efficient!!! :  val diceImage: ImageView = findViewById(R.id.dice_image)
-        val drawableResource = when (randomInt) {
+    private fun getRandomDiceImage() : Int {
+        val randomInt = (1..6).random()
+        return when (randomInt) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
             3 -> R.drawable.dice_3
@@ -58,8 +69,29 @@ class MainActivity : AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
-        diceImage.setImageResource(drawableResource)
     }
+
+
+//    private fun rollDice() {
+////        Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show()
+//        //val resultText: TextView = findViewById(R.id.result_text)
+////        resultText.text = "Dice Rolled!"
+//        val randomInt = (1..6).random()
+//        //resultText.text = randomInt.toString()
+//
+//        // this is not efficient!!! :  val diceImage: ImageView = findViewById(R.id.dice_image)
+//        val drawableResource = when (randomInt) {
+//            1 -> R.drawable.dice_1
+//            2 -> R.drawable.dice_2
+//            3 -> R.drawable.dice_3
+//            4 -> R.drawable.dice_4
+//            5 -> R.drawable.dice_5
+//            else -> R.drawable.dice_6
+//        }
+//        diceImage.setImageResource(drawableResource)
+//    }
+
+
 
 //    /**
 //     * Click listener for the countUp button.
