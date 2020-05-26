@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import timber.log.Timber
 
 /**
  * DiceRoller demonstrates simple interactivity in an Android app.
@@ -55,6 +56,38 @@ class MainActivity : AppCompatActivity() {
 
         val clearButton: Button = findViewById(R.id.clear_button)
         clearButton.setOnClickListener { clear() }
+
+        Timber.i("onCreate called")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Timber.i("onStart Called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Timber.i("onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.i("onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.i("onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.i("onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Timber.i("onRestart Called")
     }
 
     private fun clear() {
